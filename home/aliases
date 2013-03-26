@@ -1,0 +1,49 @@
+
+alias sudo='sudo '
+alias komodo='open -a "Komodo IDE"'
+alias k=komodo
+alias h=history
+alias flushdns='dscacheutil -flushcache'
+alias todo=toodledo
+
+alias ea="k ~/bin/dotfiles/bash/aliases && source ~/.bashrc"
+
+alias rmsvn="find . -name .svn -print0 | xargs -0 rm -rf"
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+#eval "`dircolors -b`"
+alias ls='ls -G'
+
+alias l=ls
+alias la='ls -a'
+alias ll='ls -ltr'
+alias lal='ls -al'
+alias sl=ls
+
+alias cl=clear
+alias cla='clear;la'
+alias cll='clear;ll'
+alias cls='clear;ls'
+alias clal='clear;lal'
+
+alias rmdir='rm -rf'
+
+alias d=date
+alias ff='find . -name $1'
+alias h=history
+
+alias more=less
+alias mroe=more
+alias m=more
+
+alias r='fc -s'
+alias igrep='grep -i'
+
+alias reload='sudo apachectl restart'
+alias disku='du -sh * | sort -rn | head'
+alias psg='ps aux | grep'
+alias lsg='ls -l | grep'
