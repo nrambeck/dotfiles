@@ -1,0 +1,17 @@
+# System files
+.DS_Store
+
+# Commonly ignored extensions
+.diff
+.orig
+.log
+*~
+
+# Version control
+.hg
+.svn
+
+# IDE stuff
+.komodotools
+*.komodoproject
+
