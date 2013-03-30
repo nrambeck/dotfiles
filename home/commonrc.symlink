@@ -10,7 +10,7 @@ export LANG=en_US.UTF-8
 
 export EDITOR=vim
 
-export PATH=$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/sbin:$HOME/.dotfiles/bin:$PATH
 
 # Use homebrew's PHP
 export PATH="$(brew --prefix josegonzalez/php/php53)/bin:$PATH"
