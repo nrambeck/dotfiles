@@ -42,6 +42,14 @@ setup_gitconfig () {
   fi
 }
 
+setup_phpstorm () {
+  user 'Please clode PHPStorm if it is open (press return to continue)'
+  read
+  git clone https://github.com/Sweetchuck/WebIdeConfigManager.git
+  git clone --recursive --branch 7.x-1.x http://git.drupal.org/project/phpstorm-templates.git WebIdeConfigManager/ConfigHome/drupal
+  ./WebIdeConfigManager/WebIdeConfigManager.php push
+}
+
 link_files () {
   ln -s $1 $2
   success "linked $1 to $2"
@@ -116,6 +124,7 @@ install_dotfiles () {
 
 setup_gitconfig
 install_dotfiles
+setup_phpstorm
 
 # If we are on a mac, lets install and setup homebrew
 if [ "$(uname -s)" == "Darwin" ]
