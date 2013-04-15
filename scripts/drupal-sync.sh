@@ -24,7 +24,7 @@ drush sql-sync --temp --no-cache @$src @$target
 echo "Syncing files from $src to $target"
 drush rsync -O @$src:%files @$target:%files
 
-echo "Clearning the cache on $target"
+echo "Clearing the cache on $target"
 drush @$target cc all
 
 echo "Sync complete!"
