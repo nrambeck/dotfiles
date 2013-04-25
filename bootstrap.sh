@@ -128,18 +128,12 @@ git submodule update
 
 setup_gitconfig
 install_dotfiles
-setup_phpstorm
 
-# If we are on a mac, lets install and setup homebrew
+# Mac-only installations
 if [ "$(uname -s)" == "Darwin" ]
 then
-  info "installing dependencies"
-  if . bin/dot > /tmp/dotfiles-dot 2>&1
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
+  info "Mac-only installations"
+  setup_phpstorm
 fi
 
 echo ''
