@@ -122,6 +122,10 @@ install_dotfiles () {
   done
 }
 
+# Install submodules
+git submodule init
+git submodule update
+
 setup_gitconfig
 install_dotfiles
 setup_phpstorm
