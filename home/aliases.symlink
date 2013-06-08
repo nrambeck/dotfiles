@@ -3,7 +3,7 @@ alias sudo='sudo '
 alias komodo='open -a "Komodo IDE"'
 alias k=komodo
 alias h=history
-alias flushdns='dscacheutil -flushcache'
+alias flushdns='sudo killall -HUP mDNSResponder'
 alias todo=toodledo
 
 alias ea="k ~/bin/dotfiles/bash/aliases && source ~/.bashrc"
