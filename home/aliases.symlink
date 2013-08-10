@@ -45,5 +45,7 @@ alias reload='sudo apachectl restart'
 alias disku='du -sh * | sort -rn | head'
 alias psg='ps aux | grep'
 alias lsg='ls -l | grep'
+# Disable zsh glogging for the following commands
 alias bower='noglob bower'
+alias git=' noglob git'
 
