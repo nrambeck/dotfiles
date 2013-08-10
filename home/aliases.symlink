@@ -4,9 +4,8 @@ alias komodo='open -a "Komodo IDE"'
 alias k=komodo
 alias h=history
 alias flushdns='sudo killall -HUP mDNSResponder'
-alias todo=toodledo
 
-alias ea="k ~/bin/dotfiles/bash/aliases && source ~/.bashrc"
+alias ea="vi ~/.dotfiles/home/aliases.symlink && source ~/.zshrc"
 
 alias rmsvn="find . -name .svn -print0 | xargs -0 rm -rf"
 
@@ -15,7 +14,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
-#eval "`dircolors -b`"
 alias ls='ls -G'
 
 alias l=ls
@@ -47,3 +45,5 @@ alias reload='sudo apachectl restart'
 alias disku='du -sh * | sort -rn | head'
 alias psg='ps aux | grep'
 alias lsg='ls -l | grep'
+alias bower='noglob bower'
+
