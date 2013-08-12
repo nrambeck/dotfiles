@@ -73,3 +73,5 @@ compinit
 WORDCHARS=${WORDCHARS//[&=\/;\!#%\{]}
 
 bindkey -e
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
