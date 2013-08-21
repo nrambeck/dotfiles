@@ -1,3 +1,6 @@
 [submodule "drush"]
 	path = drush
 	url = http://git.drupal.org/project/drush.git
+[submodule "git/scripts"]
+	path = git/scripts
+	url = https://github.com/jwiegley/git-scripts
