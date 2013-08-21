@@ -17,13 +17,13 @@
         ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
         filelog = log -u
         fl = log -u
+        lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local
         dl = "!git ll -1"
         dlc = diff --cached HEAD^
         unstage = reset HEAD --
         dr  = "!f() { git diff "$1"^.."$1"; }; f"
-        promote = !$ZSH/bin/git-promote
-        wtf     = !$ZSH/bin/git-wtf
-        rank-contributers = !$ZSH/bin/git-rank-contributers
+        wtf     = !$HOME/.dotfiles/git/scripts/git-wtf
+        rank-contributors = !$HOME/.dotfiles/git/scripts/git-rank-contributors
         count   = !git shortlog -sn
 [color]
         diff = auto
