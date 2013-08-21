@@ -122,6 +122,9 @@ install_dotfiles () {
   done
 }
 
+# Grab latest version
+git pull
+
 # Install submodules
 git submodule init
 git submodule update
