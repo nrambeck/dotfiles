@@ -49,3 +49,5 @@ alias lsg='ls -l | grep'
 alias bower='noglob bower'
 alias git=' noglob git'
 
+alias codecept=./vendor/bin/codecept
+
