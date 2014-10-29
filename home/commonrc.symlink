@@ -15,5 +15,5 @@ export PATH=$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/s
 export PATH=$HOME/.composer/vendor/bin:$PATH
 
 # Use homebrew's PHP
-export PATH="$(brew --prefix josegonzalez/php/php53)/bin:$PATH"
+export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 
