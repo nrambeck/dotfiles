@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sitesdir="/Users/nathanrambeck/Sites/"
+sitesdir="/Users/nathan/Sites/"
 
 # get domain
 echo "What domain name? "
@@ -12,7 +12,7 @@ read path
 
 fullpath="${sitesdir}${path}"
 
-vhosts="/private/etc/apache2/conf/extra/httpd-vhosts.conf"
+vhosts="/private/etc/apache2/extra/httpd-vhosts.conf"
 
 # check if this site domain already exists
 #if [ -f $fn ]; then
@@ -24,8 +24,6 @@ echo "" >> $vhosts
 echo "<VirtualHost *:80>" >> $vhosts
 echo "  ServerName $domain" >> $vhosts
 echo "  DocumentRoot \"$fullpath\"" >> $vhosts
-echo "  ErrorLog \"logs/${domain}-error_log\"" >> $vhosts
-echo "  CustomLog \"logs/${domain}-access_log\" common" >> $vhosts
 echo "</VirtualHost>" >> $vhosts
 
 echo "127.0.0.1       $domain" >> /etc/hosts
