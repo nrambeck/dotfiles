@@ -12,6 +12,8 @@ export EDITOR=vim
 
 export PATH=$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$HOME/.dotfiles/bin:$HOME/.dotfiles/git/scripts:$PATH
 
+export PATH=$HOME/.composer/vendor/bin:$PATH
+
 # Use homebrew's PHP
 export PATH="$(brew --prefix josegonzalez/php/php53)/bin:$PATH"
 
