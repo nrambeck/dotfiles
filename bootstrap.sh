@@ -47,6 +47,10 @@ link_files () {
   success "linked $1 to $2"
 }
 
+install_zsh () {
+  curl -L http://install.ohmyz.sh | sh
+}
+
 install_dotfiles () {
   info 'installing dotfiles'
 
@@ -122,6 +126,7 @@ git submodule init
 git submodule update
 
 setup_gitconfig
+install_zsh
 install_dotfiles
 
 # Mac-only installations
