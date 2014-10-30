@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sitesdir="/Users/nathan/Sites/"
+sitesdir="$HOME/Sites/"
 
 # get domain
 echo "What domain name? "
