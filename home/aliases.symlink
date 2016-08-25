@@ -48,7 +48,9 @@ alias lsg='ls -l | grep'
 # Disable zsh glogging for the following commands
 alias bower='noglob bower'
 
+# PHP
 alias codecept=./vendor/bin/codecept
+alias art='php artisan'
 
 # Git
 alias gdb=git delete-branch
