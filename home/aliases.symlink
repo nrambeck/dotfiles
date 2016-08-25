@@ -39,6 +39,8 @@ alias m=more
 alias r='fc -s'
 alias igrep='grep -i'
 
+alias imgsize='identify -format "%wx%h"'
+
 alias reload='sudo apachectl restart'
 alias disku='du -sh * | sort -rn | head'
 alias psg='ps aux | grep'
