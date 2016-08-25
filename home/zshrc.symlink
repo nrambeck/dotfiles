@@ -51,6 +51,8 @@ setopt EXTENDED_HISTORY # add more info
 # setopt NO_AUTO_MENU
 # setopt BASH_AUTO_LIST
 
+unsetopt correct_all
+
 #############################
 # Variables
 
