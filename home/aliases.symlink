@@ -45,7 +45,15 @@ alias psg='ps aux | grep'
 alias lsg='ls -l | grep'
 # Disable zsh glogging for the following commands
 alias bower='noglob bower'
-alias git=' noglob git'
 
 alias codecept=./vendor/bin/codecept
+
+# Git
+#alias git=' noglob git'
+#alias git=hub
+alias gdb=git delete-branch
+#alias git='nocorrect git'
+alias gm='git merge --ff-only'
+alias gpush='git push origin $(current_branch)'
+
 
