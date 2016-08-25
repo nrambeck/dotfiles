@@ -118,8 +118,20 @@ install_dotfiles () {
   done
 }
 
+OMZ_SOURCE="source \$HOME/.zshrc-omz"
+
+source_files() {
+  info "$OMZ_SOURCE"
+  if grep --quiet "$OMZ_SOURCE" $HOME/.zshrc; then
+    info '.zshrc-omz already sourced in .zshrc file'
+  else
+    success 'sourcing .zshrc-omz in .zshrc file'
+    echo "$OMZ_SOURCE" >> $HOME/.zshrc
+  fi
+}
+
 # Grab latest version
-git pull
+git pull --rebase
 
 # Install submodules
 git submodule init
@@ -128,6 +140,7 @@ git submodule update
 setup_gitconfig
 install_zsh
 install_dotfiles
+source_files
 
 # Mac-only installations
 if [ "$(uname -s)" == "Darwin" ]
