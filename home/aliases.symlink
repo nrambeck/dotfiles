@@ -51,10 +51,7 @@ alias bower='noglob bower'
 alias codecept=./vendor/bin/codecept
 
 # Git
-#alias git=' noglob git'
-#alias git=hub
 alias gdb=git delete-branch
-#alias git='nocorrect git'
 alias gm='git merge --ff-only'
 alias gpush='git push origin $(current_branch)'
 
