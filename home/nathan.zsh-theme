@@ -136,3 +136,5 @@ build_prompt() {
 
 PROMPT='%{%f%b%k%}$(build_prompt) 
  '
+RPROMPT='%{$fg[magenta]%}[%D{%L:%M:%S %p}]%{$reset_color%}'
+
