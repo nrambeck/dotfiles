@@ -51,6 +51,24 @@ install_zsh () {
   curl -L http://install.ohmyz.sh | sh
 }
 
+install_themes () {
+  info 'installing themes'
+
+  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.zsh-theme`
+  do
+    dest="$HOME/.oh-my-zsh/themes/`basename \"${source}\"`"
+    info "symlink theme $dest --> $source"
+
+    if [ -f $dest ] || [ -d $dest ]
+    then
+      rm $dest
+      link_files $source $dest
+    else
+      link_files $source $dest
+    fi
+  done
+}
+
 install_dotfiles () {
   info 'installing dotfiles'
 
@@ -140,6 +158,7 @@ git submodule update
 setup_gitconfig
 install_zsh
 install_dotfiles
+install_themes
 source_files
 
 # Mac-only installations
