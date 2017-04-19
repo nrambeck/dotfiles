@@ -25,6 +25,8 @@
         wtf     = !$HOME/.dotfiles/git/scripts/git-wtf
         rank-contributors = !$HOME/.dotfiles/git/scripts/git-rank-contributors
         count   = !git shortlog -sn
+        showtool  = "!f() { git difftool "$1"^ "$1"; }; f"
+        added = difftool --cached
 [color]
         diff = auto
         status = auto
@@ -33,12 +35,19 @@
 [core]
         excludesfile = ~/.gitignore
         editor = vim
+	autocrlf = input
 [apply]
         whitespace = nowarn
 [mergetool]
-        keepBackup = false
+	keepBackup = false
+[diff]
+        tool = icdiff
 [difftool]
         prompt = false
+[difftool "icdiff"]
+        cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
+[pager]
+        difftool = true
 [help]
         autocorrect = 1
 [push]
@@ -47,6 +56,14 @@
         #
         # Setting to git 2.0 default to surpress warning message
         default = simple
+[merge]
+	ff = only
+	tool = p4mergetool
+        conflictstyle = diff3
+[mergetool "p4mergetool"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
+	trustExitCode = false
+[branch] 
+        autosetuprebase = always
 [rebase]
-       autostash = true
-
+	autostash = true
