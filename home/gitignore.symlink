@@ -16,3 +16,4 @@
 *.komodoproject
 .idea
 
+*.orig
