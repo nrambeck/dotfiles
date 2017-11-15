@@ -67,3 +67,5 @@
         autosetuprebase = always
 [rebase]
 	autostash = true
+        autorebase = true
+
