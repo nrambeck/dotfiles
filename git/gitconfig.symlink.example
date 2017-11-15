@@ -1,71 +1,68 @@
 # Sample gitconfig
 #
 
-[hub]
-        protocol = https
 [user]
-        name = AUTHORNAME
-        email = AUTHOREMAIL
-        helper = osxkeychain
+    name = AUTHORNAME
+    email = AUTHOREMAIL
+    helper = osxkeychain
 [alias]
-        co = checkout
-        st = status -s
-        ci = commit -v
-        br = branch
-        la = "!git config -l | grep alias | cut -c 7-"
-        ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-        ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-        filelog = log -u
-        fl = log -u
-        lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local
-        dl = "!git ll -1"
-        dlc = diff --cached HEAD^
-        unstage = reset HEAD --
-        dr  = "!f() { git diff "$1"^.."$1"; }; f"
-        wtf     = !$HOME/.dotfiles/git/scripts/git-wtf
-        rank-contributors = !$HOME/.dotfiles/git/scripts/git-rank-contributors
-        count   = !git shortlog -sn
-        showtool  = "!f() { git difftool "$1"^ "$1"; }; f"
-        added = difftool --cached
+    co = checkout
+    st = status -s
+    ci = commit -v
+    br = branch
+    la = "!git config -l | grep alias | cut -c 7-"
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    filelog = log -u
+    fl = log -u
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local
+    dl = "!git ll -1"
+    dlc = diff --cached HEAD^
+    unstage = reset HEAD --
+    dr  = "!f() { git diff "$1"^.."$1"; }; f"
+    wtf     = !$HOME/.dotfiles/git/scripts/git-wtf
+    rank-contributors = !$HOME/.dotfiles/git/scripts/git-rank-contributors
+    count   = !git shortlog -sn
+    showtool  = "!f() { git difftool "$1"^ "$1"; }; f"
+    added = difftool --cached
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-        ui = true
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
 [core]
-        excludesfile = ~/.gitignore
-        editor = vim
-	autocrlf = input
+    excludesfile = ~/.gitignore
+    editor = vim
+    autocrlf = input
 [apply]
-        whitespace = nowarn
+    whitespace = nowarn
 [mergetool]
-	keepBackup = false
+    keepBackup = false
 [diff]
-        tool = icdiff
+    tool = icdiff
 [difftool]
-        prompt = false
+    prompt = false
 [difftool "icdiff"]
-        cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
+    cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 [pager]
-        difftool = true
+    difftool = true
 [help]
-        autocorrect = 1
+    autocorrect = 1
 [push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to surpress warning message
-        default = simple
+    # See `git help config` (search for push.default)
+    # for more information on different options of the below setting.
+    #
+    # Setting to git 2.0 default to suppress warning message
+    default = simple
 [merge]
-	ff = only
-	tool = p4mergetool
-        conflictstyle = diff3
+    ff = only
+    tool = p4mergetool
+    conflictstyle = diff3
 [mergetool "p4mergetool"]
-	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
-	trustExitCode = false
-[branch] 
-        autosetuprebase = always
+    cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
+    trustExitCode = false
+[branch]
+    autosetuprebase = always
 [rebase]
-	autostash = true
-        autorebase = true
-
+    autostash = true
+    autorebase = true
