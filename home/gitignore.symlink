@@ -15,5 +15,6 @@
 .komodotools
 *.komodoproject
 .idea
+.vscode
 
 *.orig
