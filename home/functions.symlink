@@ -11,3 +11,10 @@ function take {
   mkdir -p $1
   cd $1
 }
+
+function npm-do { (PATH=$(npm bin):$PATH; eval $@;) }
+
+function homestead() {
+  ( cd ~/Homestead && vagrant $* )
+}
+
