@@ -1,10 +1,10 @@
-#Dotfiles
+# Dotfiles
 
 Nathan Rambeck's dotfiles for OS X and Linux.
 
-##Installation
+## Installation
 
-###OS X
+### OS X
 
 To install these dotfiles, run the following commands in your home directory.
 
@@ -12,7 +12,7 @@ To install these dotfiles, run the following commands in your home directory.
     cd .dotfiles
     ./bootstrap.sh
 
-##What's included
+## What's included
 
 My dotfiles are geared towards development with Drupal so it includes Drush and various scripts that make Drupal development easier. Here is a complete list.
 
