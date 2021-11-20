@@ -51,6 +51,8 @@ alias bower='noglob bower'
 # PHP
 alias codecept=./vendor/bin/codecept
 alias art='php artisan'
+alias sail='bash vendor/bin/sail'
+alias sart='sail artisan'
 
 # Git
 alias gdb=git delete-branch

@@ -23,7 +23,7 @@ ZSH_THEME="nathan"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew osx ruby git-extras git-flow composer vi-mode vagrant asdf laravel5 npm themes docker cp)
+plugins=(git brew macos ruby git-extras git-flow composer vi-mode vagrant asdf laravel5 npm themes docker cp)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -77,3 +77,8 @@ WORDCHARS=${WORDCHARS//[&=\/;\!#%\{]}
 bindkey -e
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# Google Cloud
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
