@@ -59,4 +59,6 @@ alias gdb=git delete-branch
 alias gm='git merge --ff-only'
 alias gpush='git push origin $(current_branch)'
 
+# AI
+alias claude='SHELL=/bin/bash claude'
 
