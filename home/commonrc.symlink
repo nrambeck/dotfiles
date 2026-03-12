@@ -4,6 +4,9 @@
 # Load functions
 [[ -f "$HOME/.functions" ]] && source "$HOME/.functions"
 
+# Load environment variables
+[[ -f "$HOME/.env" ]] && source "$HOME/.env"
+
 # Locale
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
