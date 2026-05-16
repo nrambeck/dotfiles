@@ -80,4 +80,6 @@ prefer rebasing and fast-forward merges; the default branch is `master`.
 Do not edit generated or personal files such as `git/gitconfig.symlink` unless
 explicitly asked. Prefer small, targeted patches, preserve existing user changes,
 and avoid running `bootstrap.sh` without clear approval because it mutates the
-developer's home directory.
+developer's home directory. When making repository changes, create atomic commits
+automatically after validation; do not push commits unless the user explicitly
+asks for a push.
