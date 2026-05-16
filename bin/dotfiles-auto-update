@@ -1,0 +1,152 @@
+#!/usr/bin/env bash
+
+set -u
+
+STATE_DIR="${DOTFILES_AUTO_UPDATE_STATE_DIR:-${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles-auto-update}"
+LOG_FILE="${STATE_DIR}/auto-update.log"
+
+export PATH="$HOME/.local/bin:$HOME/.asdf/shims:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:${PATH:-}"
+
+mkdir -p "$STATE_DIR" 2>/dev/null || exit 0
+
+LOCK_DIR="${STATE_DIR}/lock"
+if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+  exit 0
+fi
+
+cleanup() {
+  rmdir "$LOCK_DIR" 2>/dev/null || true
+}
+trap cleanup EXIT
+
+log() {
+  printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$LOG_FILE"
+}
+
+load_asdf() {
+  if command -v asdf >/dev/null 2>&1; then
+    return 0
+  fi
+
+  if [ -s /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+    # shellcheck disable=SC1091
+    . /opt/homebrew/opt/asdf/libexec/asdf.sh
+  elif [ -s /usr/local/opt/asdf/libexec/asdf.sh ]; then
+    # shellcheck disable=SC1091
+    . /usr/local/opt/asdf/libexec/asdf.sh
+  elif [ -s "$HOME/.asdf/asdf.sh" ]; then
+    # shellcheck disable=SC1091
+    . "$HOME/.asdf/asdf.sh"
+  fi
+}
+
+asdf_plugin_dir() {
+  printf '%s/plugins/nodejs\n' "${ASDF_DATA_DIR:-${ASDF_DIR:-$HOME/.asdf}}"
+}
+
+run_once() {
+  local key="$1"
+  local current_period="$2"
+  shift 2
+
+  local stamp_file="${STATE_DIR}/${key}.last"
+  local previous_period=""
+
+  if [ -f "$stamp_file" ]; then
+    previous_period="$(cat "$stamp_file" 2>/dev/null || true)"
+  fi
+
+  if [ "$previous_period" = "$current_period" ]; then
+    return 0
+  fi
+
+  printf '%s\n' "$current_period" > "$stamp_file" 2>/dev/null || return 0
+  "$@"
+}
+
+update_claude_code() {
+  if command -v claude >/dev/null 2>&1; then
+    log "Updating Claude Code with native updater"
+    if claude update >> "$LOG_FILE" 2>&1; then
+      log "Finished Claude Code native update"
+    else
+      log "Claude Code native update failed"
+    fi
+    return 0
+  fi
+
+  log "Skipping Claude Code update: claude is not available"
+}
+
+update_codex_cli() {
+  load_asdf
+
+  if ! command -v npm >/dev/null 2>&1; then
+    log "Skipping Codex CLI update: npm is not available"
+    return 0
+  fi
+
+  log "Updating Codex CLI npm package"
+  if npm install -g @openai/codex@latest >> "$LOG_FILE" 2>&1; then
+    log "Finished Codex CLI update"
+  else
+    log "Codex CLI update failed"
+  fi
+}
+
+update_node_lts() {
+  load_asdf
+
+  if ! command -v asdf >/dev/null 2>&1; then
+    log "Skipping Node LTS update: asdf is not available"
+    return 0
+  fi
+
+  if ! asdf plugin list 2>/dev/null | grep -qx 'nodejs'; then
+    log "Adding asdf nodejs plugin"
+    asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git >> "$LOG_FILE" 2>&1 || {
+      log "Failed to add asdf nodejs plugin"
+      return 0
+    }
+  fi
+
+  log "Resolving latest Node LTS with asdf"
+  asdf plugin update nodejs >> "$LOG_FILE" 2>&1 || true
+  if ! asdf cmd nodejs update-nodebuild >> "$LOG_FILE" 2>&1; then
+    if ! asdf cmd nodejs update-nodebuild.bash >> "$LOG_FILE" 2>&1; then
+      local plugin_dir
+      plugin_dir="$(asdf_plugin_dir)"
+      if [ -f "$plugin_dir/lib/commands/command-update-nodebuild.bash" ]; then
+        bash "$plugin_dir/lib/commands/command-update-nodebuild.bash" >> "$LOG_FILE" 2>&1 || true
+      fi
+    fi
+  fi
+
+  local node_lts_version
+  node_lts_version="$(asdf cmd nodejs resolve lts --latest-available 2>> "$LOG_FILE" | tail -n 1)"
+  if [ -z "$node_lts_version" ]; then
+    node_lts_version="$(asdf cmd nodejs resolve.bash lts --latest-available 2>> "$LOG_FILE" | tail -n 1)"
+  fi
+  if [ -z "$node_lts_version" ]; then
+    local plugin_dir
+    plugin_dir="$(asdf_plugin_dir)"
+    if [ -f "$plugin_dir/lib/commands/command-resolve.bash" ]; then
+      node_lts_version="$(bash "$plugin_dir/lib/commands/command-resolve.bash" lts --latest-available 2>> "$LOG_FILE" | tail -n 1)"
+    fi
+  fi
+  if [ -z "$node_lts_version" ]; then
+    log "Failed to resolve latest Node LTS version"
+    return 0
+  fi
+
+  log "Installing Node ${node_lts_version} with asdf and setting it as the global default"
+  if asdf install nodejs "$node_lts_version" >> "$LOG_FILE" 2>&1 && { asdf set --home nodejs "$node_lts_version" >> "$LOG_FILE" 2>&1 || asdf global nodejs "$node_lts_version" >> "$LOG_FILE" 2>&1; } && asdf reshim nodejs >> "$LOG_FILE" 2>&1; then
+    log "Finished Node LTS update"
+  else
+    log "Node LTS update failed"
+  fi
+}
+
+run_once claude-code-daily "$(date '+%Y-%m-%d')" update_claude_code
+run_once codex-cli-daily "$(date '+%Y-%m-%d')" update_codex_cli
+run_once node-lts-monthly "$(date '+%Y-%m')" update_node_lts

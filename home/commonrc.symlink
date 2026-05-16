@@ -43,3 +43,14 @@ fi
 
 # Python 3
 export PATH="$PATH:$HOME/Library/Python/3.8/bin"
+
+# Opportunistic package updates for new interactive shells.
+if [[ $- == *i* ]] && [[ "${DOTFILES_AUTO_UPDATE:-1}" != "0" ]] && command -v dotfiles-auto-update >/dev/null 2>&1; then
+  dotfiles_auto_update_bin="$(command -v dotfiles-auto-update)"
+  if command -v launchctl >/dev/null 2>&1; then
+    launchctl submit -l "dotfiles-auto-update.$$.$RANDOM" -- "$dotfiles_auto_update_bin" >/dev/null 2>&1
+  else
+    nohup "$dotfiles_auto_update_bin" </dev/null >/dev/null 2>&1 &!
+  fi
+  unset dotfiles_auto_update_bin
+fi

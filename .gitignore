@@ -1,3 +1,4 @@
 git/gitconfig.symlink
 WebIdeConfigManager
 home/env.symlink
+.claude/settings.local.json
