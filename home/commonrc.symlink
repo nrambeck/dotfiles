@@ -13,7 +13,7 @@ export LANG=en_US.UTF-8
 
 export EDITOR=vim
 
-export PATH=$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$HOME/.dotfiles/bin:$HOME/.dotfiles/git/scripts:$PATH
+export PATH=$HOME/.rvm/bin:$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$HOME/.dotfiles/bin:$HOME/.dotfiles/git/scripts:$PATH
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.composer/vendor/bin:$PATH
@@ -28,9 +28,18 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# ASDF 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# ASDF
+if [ -s /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+  . /opt/homebrew/opt/asdf/libexec/asdf.sh
+elif [ -s /usr/local/opt/asdf/libexec/asdf.sh ]; then
+  . /usr/local/opt/asdf/libexec/asdf.sh
+elif command -v asdf >/dev/null 2>&1; then
+  export ASDF_DATA_DIR="${ASDF_DATA_DIR:-$HOME/.asdf}"
+  case ":$PATH:" in
+    *":$ASDF_DATA_DIR/shims:"*) ;;
+    *) export PATH="$ASDF_DATA_DIR/shims:$PATH" ;;
+  esac
+fi
 
 # Python 3
 export PATH="$PATH:$HOME/Library/Python/3.8/bin"
-
